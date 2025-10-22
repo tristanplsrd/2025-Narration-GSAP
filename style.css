@@ -1,0 +1,177 @@
+/* ========================================
+   FONT IMPORT
+======================================== */
+@font-face {
+  font-family: 'Highrise';
+  src: url('assets/HighriseFont-Condensed-Demo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   GLOBAL RESET
+======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ========================================
+   SCROLL PROGRESS BAR
+======================================== */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background-color: rgb(71, 237, 255);
+  z-index: 10000;
+  transition: width 0.2s ease-out;
+}
+
+/* ========================================
+   WINDOW 1 - INTRO / LOGO
+======================================== */
+.window1 {  
+  height: 1080px;
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-family: 'Highrise', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  position: fixed;
+  z-index: 100;
+}
+
+.window1 .logo img {
+  width: 400px;
+  height: auto;
+}
+
+/* Scroll to Explore */
+.scroll-explore {
+  position: absolute;
+  bottom: 50px;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'Highrise', sans-serif;
+  letter-spacing: 1px;
+  z-index: inherit;
+  line-height: 1.2; /* pour faire 2 lignes si nécessaire */
+}
+
+/* ========================================
+   WINDOW 2 
+======================================== */
+
+/* Window 2 */
+.window2 {
+  height: 4000px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+.workspace {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(71, 237, 255, 0.2);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 40px rgba(71, 237, 255, 0.4);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  margin: 10px 15px 0;
+  color: rgb(71, 237, 255);
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 5px 15px 15px;
+  line-height: 1.4;
+}
+
+
+/* Window 3 */
+.window3 {
+  height: 1080px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: -2;
+}
+
+/* Window 4 */
+.window4 {
+  height: 1080px;
+  background-color: rgb(71, 237, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: -4;
+}
+
+/* Window 5 */
+.window5 {
+  height: 1080px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: -5;
+}
