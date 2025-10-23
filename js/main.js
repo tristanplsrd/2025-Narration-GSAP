@@ -24,6 +24,28 @@ gsap.to("#logo", {
   }
 });
 
+/** LOGO OPACITY========================================================================================== */
+// Timeline pour faire disparaître .window1
+let tl = gsap.timeline({
+  repeat: -1,
+  yoyo: true
+});
+
+tl.to('.window1', {
+  opacity: 0,
+  yPercent: -100, // la fait monter hors de l'écran
+  transformOrigin: "center center",
+  scrollTrigger: {
+    trigger: '.window1',
+    start: '1000px top',
+    end: '1100px top',
+    scrub: true,
+    onEnter: () => gsap.set('.window1', { pointerEvents: "none" }),  // devient non cliquable
+    onLeaveBack: () => gsap.set('.window1', { pointerEvents: "auto" }) // redevient cliquable si on remonte
+  }
+});
+
+
 
 /** LOGO ROTATION ANIMATION ON LOAD======================================================================= */
 
@@ -59,61 +81,57 @@ gsap.from('.scroll-explore' , {
 });
 
 
+// Sélectionne chaque ligne (span)
+const lines = gsap.utils.toArray("aboutme span");
 
-/** LOGO OPACITY========================================================================================== */
-// Timeline pour faire disparaître .window1
-let tl = gsap.timeline({
-  repeat: -1,
-  yoyo: true
-});
-
-tl.to('.window1', {
-  opacity: 0,
-  yPercent: -100, // la fait "monter" hors de l'écran
-  transformOrigin: "center center",
-  scrollTrigger: {
-    trigger: '.window1',
-    start: '1000px top',
-    end: '1300px top',
-    scrub: true,
-    onEnter: () => gsap.set('.window1', { pointerEvents: "none" }),  // devient non cliquable
-    onLeaveBack: () => gsap.set('.window1', { pointerEvents: "auto" }) // redevient cliquable si on remonte
-  }
-});
-
-
-
-/** CARD========================================================================================== */
-
-gsap.registerPlugin(Draggable);
-
-// Sélectionne toutes les cartes
-const cards = document.querySelectorAll('.card');
-
-// Empile les cartes au centre avec un léger décalage visuel (rotation / z-index)
-cards.forEach((card, i) => {
-  gsap.set(card, {
-    x: 0,
-    y: 0,
-    rotation: gsap.utils.random(-2, 2),
-    zIndex: i + 1 // chaque carte légèrement au-dessus de la précédente
-  });
-
-  // Rends chaque carte déplaçable
-  Draggable.create(card, {
-    type: "x,y",
-    edgeResistance: 0.9,
-    inertia: true,
-    bounds: ".workspace",
-    onPress() {
-      this.target.style.zIndex = 9999; // Passe au premier plan quand on la prend
-      gsap.to(this.target, { scale: 1.05, duration: 0.2 }); // petit effet de zoom
-    },
-    onRelease() {
-      gsap.to(this.target, { scale: 1, duration: 0.2 }); // retour à la taille normale
-      this.target.style.zIndex = ""; // Réinitialise la pile
+// Anime chaque span avec alternance gauche/droite
+lines.forEach((line, i) => {
+  gsap.to(line, {
+    x: i % 2 === 0 ? -200 : 200, // alternance gauche/droite
+    opacity: 1,
+    duration: 1.2,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: line,
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+      markers: true,
     }
   });
 });
 
 
+    gsap.to('.aboutme', {
+        scrollTrigger: {
+          trigger: '.aboutme',
+          start: "10% top",
+          end: "1700px top",
+          scrub: true,
+        },
+        scale: 2,
+        opacity: 0,
+        duration: 2,
+        markers: true,
+      });
+
+     // BANDEROLE++++++++++++++++++=  ====================================================
+
+// Animation de la banderole  
+
+      let marqueeTween = gsap.to(".marquee-inner", {
+  xPercent: -50,
+  repeat: -1,
+  ease: "linear",
+  duration: 20, // vitesse du mouvement
+});
+
+// Stop / reprend selon le scroll
+ScrollTrigger.create({
+  trigger: ".marquee-section",
+  start: "top bottom", // commence quand elle entre dans la vue
+  end: "bottom top",   // s'arrête quand elle sort
+  onEnter: () => marqueeTween.play(),
+  onLeave: () => marqueeTween.pause(),
+  onEnterBack: () => marqueeTween.play(),
+  onLeaveBack: () => marqueeTween.pause(),
+});
