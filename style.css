@@ -170,9 +170,113 @@ body {
   will-change: transform;
 }
 
+
 .marquee-inner span {
   margin-right: 100px; /* espace entre les répétitions */
 }
+
+
+/*LES EXEMPLES*/
+body {
+  background-color: #0a0a0a;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* SECTION DES CARTES */
+#cards-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CARTES SUPERPOSÉES */
+.card {
+  position: absolute;
+  width: 350px;
+  background: #111;
+  border: 2px solid rgb(71, 237, 255);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(71, 237, 255, 0.3);
+  padding: 20px;
+  text-align: center;
+  cursor: grab;
+  opacity: 0.95;
+  transition: transform 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.card h2 {
+  color: rgb(71, 237, 255);
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+/* BOUTON */
+.card button {
+  background-color: rgb(71, 237, 255);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  background-color: white;
+  color: black;
+}
+
+/* DÉCALAGE VISUEL DES CARTES */
+.card1 { transform: translateY(-40px); z-index: 3; }
+.card2 { transform: translateY(0px); z-index: 2; }
+.card3 { transform: translateY(40px); z-index: 1; }
+
+/* SECTION SCROLL HORIZONTAL */
+
+/* Conteneur scroll horizontal */
+.horizontal-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+/* Chaque panel = une “diapo” */
+.panel {
+  flex: 0 0 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.panel img {
+  width: 400px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(71, 237, 255, 0.4);
+}
+
 
 /* Window 4 */
 .window4 {

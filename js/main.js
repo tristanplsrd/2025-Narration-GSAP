@@ -135,3 +135,111 @@ ScrollTrigger.create({
   onEnterBack: () => marqueeTween.play(),
   onLeaveBack: () => marqueeTween.pause(),
 });
+
+// DRAGGABLE PROJECTS =============================================================================================
+// Animation d’arrivée avec ScrollTrigger
+gsap.registerPlugin(ScrollTrigger, Draggable, ScrollToPlugin);
+
+// Position initiale (empilées au centre)
+gsap.set(".card", (i) => ({
+  x: i * 15 - 30,
+  y: i * 15 - 30,
+  zIndex: 10 - i,
+}));
+
+// Animation d’apparition fluide quand la section entre en vue
+gsap.to(".card", {
+  opacity: 1,
+  y: 0,
+  stagger: 0.15,
+  ease: "power3.out",
+  duration: 1,
+  scrollTrigger: {
+    trigger: "#cards-section",
+    start: "top 70%",
+  },
+});
+
+// Rendre les cartes déplaçables (limitées à la section)
+const container = document.querySelector("#cards-section");
+
+Draggable.create(".card", {
+  type: "x,y",
+  bounds: container,
+  inertia: false,
+  edgeResistance: 1,
+  onPress() {
+    gsap.to(this.target, { scale: 1.05, zIndex: 20, duration: 0.1 });
+  },
+  onRelease() {
+    gsap.to(this.target, { scale: 1, zIndex: 10, duration: 0.1 });
+  },
+});
+
+// Gestion des boutons "En savoir plus" (scroll vers la bonne section)
+document.querySelectorAll(".learn-more").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const target = btn.getAttribute("data-target");
+
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: target,
+      ease: "power2.inOut",
+    });
+  });
+});
+
+// On cible toutes les sections avec horizontal-wrapper
+const sections = document.querySelectorAll(".project-section");
+
+sections.forEach((section) => {
+  const wrapper = section.querySelector(".horizontal-wrapper");
+  const panels = wrapper.querySelectorAll(".panel");
+
+  // Scroll horizontal pour chaque section
+  gsap.to(panels, {
+    xPercent: -100 * (panels.length - 1),
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => "+=" + section.offsetWidth * (panels.length - 1),
+      scrub: true,
+      pin: true,
+      anticipatePin: 1
+    }
+  });
+
+  // Animation fade + slide pour chaque panel
+  panels.forEach((panel) => {
+    gsap.to(panel, {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: panel,
+        containerAnimation: gsap.getProperty(wrapper, "x") || null,
+        start: "left center",
+        end: "right center",
+        scrub: true
+      }
+    });
+  });
+});
+
+// Effets d’apparition pour chaque section
+sections.forEach((section) => {
+  const img = section.querySelector("img");
+  const text = section.querySelector(".content");
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      containerAnimation: ScrollTrigger.getById("horizontalScroll"),
+      start: "left center",
+      end: "right center",
+      scrub: true
+    }
+  })
+  .to(img, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0)
+  .to(text, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0.2);
+});
