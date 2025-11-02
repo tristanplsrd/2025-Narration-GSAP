@@ -93,7 +93,6 @@ lines.forEach((line, i) => {
       trigger: line,
       start: "top 85%",
       toggleActions: "play none none reverse",
-      markers: true,
     }
   });
 });
@@ -105,7 +104,6 @@ gsap.to('.aboutme', {
       start: "10% top",
       end: "1700px top",
       scrub: true,
-      markers: true,
     },
     scale: 2,
     opacity: 0,
@@ -241,3 +239,34 @@ sections.forEach((section) => {
   .to(img, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0)
   .to(text, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0.2);
 });
+
+// Timeline GSAP pour la section restart
+gsap.timeline({
+  scrollTrigger: {
+    trigger: "#restart-section",
+    start: "top 80%", // quand la section approche
+    end: "top 50%",
+    scrub: true,
+  }
+})
+.fromTo(".restart-content", 
+  { opacity: 0, scale: 0.5, rotateX: 180 },
+  { opacity: 1, scale: 1, rotateX: 0, duration: 1, ease: "power2.out" }
+)
+.fromTo("#restart-btn",
+  { opacity: 0, scale: 0.5 },
+  { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
+  "-=0.5" // commence en même temps que la fin du texte
+);
+
+// Scroll smooth vers le haut au clic
+const restartBtn = document.getElementById("restart-btn");
+
+restartBtn.addEventListener("click", () => {
+  gsap.to(window, {
+    duration: 1.5,
+    scrollTo: { y: 0 },
+    ease: "power2.inOut"
+  });
+});
+
