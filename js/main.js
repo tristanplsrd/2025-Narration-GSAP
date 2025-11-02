@@ -237,7 +237,9 @@ sections.forEach((section) => {
       containerAnimation: ScrollTrigger.getById("horizontalScroll"),
       start: "left center",
       end: "right center",
-      scrub: true
+      scrub: true,
+      yoyo: true,
+      toggleActions: "play none none reverse",
     }
   })
   .to(img, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0)
