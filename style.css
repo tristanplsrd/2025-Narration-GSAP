@@ -16,10 +16,10 @@
   font-style: normal;
   font-display: swap;
 }
-
 /* ========================================
    GLOBAL RESET
 ======================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -51,7 +51,7 @@ body {
    WINDOW 1 - INTRO / LOGO
 ======================================== */
 .window1 {  
-  height: 1080px;
+  height: 100%;
   width: 100%;
   background-color: #000;
   display: flex;
@@ -86,10 +86,15 @@ body {
 /* ========================================
    WINDOW 2 
 ======================================== */
-
+@media (max-width: 428px) {
+  .window2 {
+    height: 300vh;
+    background-color: black;
+  }
+}
 /* Window 2 */
 .window2 {
-  height: 2500px;
+  height: 200%;
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -104,9 +109,6 @@ body {
   width: 100vw;
   height: 100vh;
 }
-
-
-
 
 .mot {
   font-family: poppins, sans-serif;
@@ -123,7 +125,6 @@ body {
   width: 90%;
   font-size: 6rem;
 }
-
 
 /* Window 3 */
 .window3 {
@@ -170,11 +171,9 @@ body {
   will-change: transform;
 }
 
-
 .marquee-inner span {
   margin-right: 100px; /* espace entre les répétitions */
 }
-
 
 /*LES EXEMPLES*/
 body {
@@ -291,31 +290,4 @@ body {
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(71, 237, 255, 0.4);
-}
-
-
-/* Window 4 */
-.window4 {
-  height: 1080px;
-  background-color: rgb(71, 237, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10rem;
-  font-weight: bold;
-  color: #fff;
-  z-index: -4;
-}
-
-/* Window 5 */
-.window5 {
-  height: 1080px;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10rem;
-  font-weight: bold;
-  color: #fff;
-  z-index: -5;
 }

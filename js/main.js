@@ -45,8 +45,6 @@ tl.to('.window1', {
   }
 });
 
-
-
 /** LOGO ROTATION ANIMATION ON LOAD======================================================================= */
 
 gsap.from('#logo' , {
@@ -101,24 +99,23 @@ lines.forEach((line, i) => {
 });
 
 
-    gsap.to('.aboutme', {
-        scrollTrigger: {
-          trigger: '.aboutme',
-          start: "10% top",
-          end: "1700px top",
-          scrub: true,
-        },
-        scale: 2,
-        opacity: 0,
-        duration: 2,
-        markers: true,
-      });
+gsap.to('.aboutme', {
+    scrollTrigger: {
+      trigger: '.aboutme',
+      start: "10% top",
+      end: "1700px top",
+      scrub: true,
+      markers: true,
+    },
+    scale: 2,
+    opacity: 0,
+    duration: 2,
+});
 
-     // BANDEROLE++++++++++++++++++=  ====================================================
+// BANDEROLE++++++++++++++++++=  ====================================================
 
 // Animation de la banderole  
-
-      let marqueeTween = gsap.to(".marquee-inner", {
+let marqueeTween = gsap.to(".marquee-inner", {
   xPercent: -50,
   repeat: -1,
   ease: "linear",
@@ -239,7 +236,6 @@ sections.forEach((section) => {
       end: "right center",
       scrub: true,
       yoyo: true,
-      toggleActions: "play none none reverse",
     }
   })
   .to(img, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, 0)
